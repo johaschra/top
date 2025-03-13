@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuseelandreise</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+    <header>
+        <img src="images/header.jpg" alt="Überblick über die Pancake Rocks und die Küste.">
+        <!--images/header: https://en.wikipedia.org/wiki/Pancake_Rocks_and_Blowholes#/media/File:Punakaiki_-_looking_south.jpg-->
+
+        <a href="https://github.com/johaschra/"><img src="images/user.jpg" alt="User Bild Wolken."></a>
+        <!--images/user: https://pixabay.com/de/photos/wolken-altokumulus-lentikularis-1380111/ -->
+    </header>
+
+
+
+    <main>
+        <h1>Neuseelandreise</h1>
+        <h2>Pancake rocks (Punakaiki)</h2>
+        <p>Die <strong>Pancake Rocks</strong> sind eine Felsformation im <em>Paparoa-Nationalpark</em>
+            auf der Südinsel Neuseelands etwa 40 Kilometer nördlich von Greymouth. Direkt an der Tasmansee gelegen,
+            sehen
+            die Felsen aus wie übereinander geschichtete <strong><em>Eierkuchen</em></strong> , wodurch sie zu ihrem
+            Namen
+            kamen.</p>
+        <p>Vor 30 Millionen Jahren übereinander geschichtete Ablagerungen von Kalksedimenten und Tonmineralien,
+            erodieren
+            unterschiedlich schnell. Seit diese Ablagerungen durch eine Landhebung an die Oberfläche gehoben wurden und
+            Wellen, Wind und Regen ausgesetzt sind, schreitet die Abtragung stetig voran. Das Wasser der Brandung bricht
+            sich an den zahlreichen Felsnasen, in Höhlen und Ausspülungen und drückt zurückfließendes Wasser und
+            durchströmende Luft durch enge Löcher und Röhren im Felsen, was oberhalb der Felsen als Blowholes sicht- und
+            durch starkes Zischen in der Luft hörbar wird. </p>
+        Quelle: <a href="https://de.wikipedia.org/wiki/Pancake_Rocks">Wikipedia</a>
+        <figure>
+            <img src="images/attraction.jpg" alt="Pancake Rocks" style="width: 100%; height: auto; max-width: 800px;">
+            <figcaption>Blick auf die Pancake Rocks und das Meer. Quelle: <a href=" https://commons.wikimedia.org/wiki/Category:Pancake_Rocks?uselang=de#/media/File:Pancake_Rocks_01.jpg">
+                    wikimedia</a>
+            </figcaption>
+        </figure>
+        <!--Das ist ein Kommentar-->
+        <!-- https://commons.wikimedia.org/wiki/Category:Pancake_Rocks?uselang=de#/media/File:Pancake_Rocks_01.jpg-->
+
+        <h3>Übersichtskarte</h3>
+        <div id="map" style="width: 900px; height: 600px; border: 1px solid silver;"> </div>
+
+        <h3>Links</h3>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=lJSKOgMOB4M">Video über die Pancake Rocks</a> </li>
+            <li> <a href="https://www.doc.govt.nz/parks-and-recreation/places-to-go/west-coast/places/paparoa-national-park/things-to-do/tracks/pancake-rocks-and-blowholes-walk/">Department
+                    of conservation</a> </li>
+            <li><a href="https://www.highlights-in-neuseeland.de/sehenswurdigkeiten/pancake-rocks/">Highlights-in-neuseeland</a>
+            </li>
+        </ul>
+    </main>
+
+
+
+
+    <footer>
+        <nav>
+            <a href="https://benmertens.github.io/nz/">vorhergehenede Etappe</a>
+            <a href="https://johaschra.github.io/nz/">diese Etappe</a>
+            <a href="https://lizzie2911.github.io/nz/">nächste Etappe</a>
+        </nav>
+    </footer>
+
+
+
+     <!-- weil Java code und nicht html code
+      L. steht für Leaflet, View([long, lat], zoomfaktor)-->
+      <script>
+        var map = L.map('map').setView([-42.114383, 171.327320], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
+</body>
+
+</html>
