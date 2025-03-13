@@ -81,6 +81,8 @@
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+        var marker = L.marker([-34.603486, -58.381639]).addTo(map);
+        marker.bindPopup("<b>Buenos Aires!</b><br>I am a popup.").openPopup();
     </script>
 </body>
 
