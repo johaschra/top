@@ -1,6 +1,5 @@
 
-const = [
-    // bitte  lat, lng, zoom und title eurer Lieblingsorte-Etappe eintragen
+// bitte  lat, lng, zoom und title eurer Lieblingsorte-Etappe eintragen
 // passt auf, dass keine Kommas verloren gehen
 // ändert eure Etappe und nicht die Etappe anderer ;-)
 
@@ -70,22 +69,22 @@ const STOPS = [
         lng: -124.636604,
         zoom: 13,
     },
-{
-
-    nr: 9,
-    title: "Konstanz",
-    user: "cs4151",
-    lat: 47.6633,
-    lng: 9.175,
-    zoom: 14,
-},
     {
-       title: "Azoren",
-  user: "pauly0602",
-  nr: 10,
-  lat: 37.77,
-  lng: -25.46,
-  zoom: 11,
+
+        nr: 9,
+        title: "Konstanz",
+        user: "cs4151",
+        lat: 47.6633,
+        lng: 9.175,
+        zoom: 14,
+    },
+    {
+        title: "Azoren",
+        user: "pauly0602",
+        nr: 10,
+        lat: 37.77,
+        lng: -25.46,
+        zoom: 11,
     },
     {
         nr: 11,
@@ -105,11 +104,11 @@ const STOPS = [
     },
     {
         nr: 13,
-        title: "Pancake rocks (Punakaiki)",
+        title: "Buenos Aires",
         user: "johaschra",
-        lat: -42.114383,
-        lng: 171.327320,
-        zoom: 11,
+        lat: -34.603486,
+        lng: -58.381639,
+        zoom: 13,
     },
     {
         nr: 16,
@@ -128,12 +127,13 @@ const STOPS = [
         zoom: 13,
     },
 
-    {nr: 18,
-    title: "Volksparkstadion",
-    user: "Pruje839",
-    lat: 53.587153,
-    lng: 9.898643,
-    zoom: 12,
+    {
+        nr: 18,
+        title: "Volksparkstadion",
+        user: "Pruje839",
+        lat: 53.587153,
+        lng: 9.898643,
+        zoom: 12,
     },
     {
         nr: 20,
@@ -144,36 +144,28 @@ const STOPS = [
         zoom: 11,
     },
     {
-nr: 21,
-title: "Tafraoute",
-user: "moplatt",
-lat: 29.72222,
-lng: -8.97194,
-zoom: 11,
+        nr: 21,
+        title: "Tafraoute",
+        user: "moplatt",
+        lat: 29.72222,
+        lng: -8.97194,
+        zoom: 11,
     },
-{
-    nr: 23,
-    title: "Habicht",
-    user: "fritzcrone",
-    lat: 47.043611,
-    lng: 11.289444,
-    zoom: 15
-},
+    {
+        nr: 23,
+        title: "Habicht",
+        user: "fritzcrone",
+        lat: 47.043611,
+        lng: 11.289444,
+        zoom: 15
+    },
     {
         nr: 24,
-    title: "Sevilla",
-    user: "StephanPumpernik",
-    lat: 37.3925,
-    lng: -5.9925,
-    zoom: 13,
-    },
-    {
-    nr: 13,
-    title: "Buenos Aires",
-    user: "johaschra",
-    lat: -34.603486,
-    lng: -58.381639,
-    zoom: 13,
+        title: "Sevilla",
+        user: "StephanPumpernik",
+        lat: 37.3925,
+        lng: -5.9925,
+        zoom: 13,
     },
     {
         lat: 49.577037,
@@ -192,15 +184,66 @@ zoom: 11,
         lng: 8.08,
     },
     {
-        
-nr: 29,
-    title: 'Utrecht',
-    user: 'jessimeteo',
-    lat: 52.088889,
-    lng: 5.115556,
-    zoom: 13
+
+        nr: 29,
+        title: 'Utrecht',
+        user: 'jessimeteo',
+        lat: 52.088889,
+        lng: 5.115556,
+        zoom: 13
     },
 ];
 
 
-]
+
+
+// Karte initialisieren
+let map = L.map('map');
+
+//Hintergrundkarte definierten
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// Marker zeichne 
+
+for (let i = 0; i < STOPS.length; i++) {
+    console.log(i, STOPS[i], STOPS[i].title)
+    let marker = L.marker([STOPS[i].lat, STOPS[i].lng]).addTo(map);
+    marker.bindPopup(`
+        <h2>${STOPS[i].title}</h2>
+        <ul>
+            <li>Geogr. Breite: ${STOPS[i].lat.toFixed(4)}°</li>
+            <li>Geogr. Länge: ${STOPS[i].lng.toFixed(4)}°</li>
+        </ul>
+        `);
+
+    // Auf eigene Etappe blicken und popup öffnen
+    if (STOPS[i].user == "johaschra") {
+        console.log(`Meine Etappe ${STOPS[i].user}`)
+        map.setView([STOPS[i].lat, STOPS[i].lng], STOPS[i].zoom);
+        marker.openPopup()
+    };
+    // Pulldownmenü befüllen
+    let option = document.createElement("option");
+    option.value = STOPS[i].user;
+    option.text = STOPS[i].title;
+    if (STOPS[i].user == "johaschra") { option.selected = true; }
+    document.querySelector("#pulldown select").appendChild(option);
+
+}
+
+
+// auf Änderungen beim Pulldown reagieren
+document.querySelector("#pulldown select").onchange = function (evt) {
+
+    let url = `https://${evt.target.value}.github.io/top/`;
+    // console.log(url);
+    // console.log(evt.target.value);
+    window.location = url;
+}
+
+
+
+
