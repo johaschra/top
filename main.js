@@ -245,6 +245,9 @@ for (let i = 0; i < STOPS.length; i++) {
 
 }
 
+// Maßstab zeichnen
+L.control.scale({ imperial: false }).addTo(map);
+
 
 // auf Änderungen beim Pulldown reagieren
 document.querySelector("#pulldown select").onchange = function (evt) {
