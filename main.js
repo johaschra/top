@@ -200,10 +200,20 @@ const STOPS = [
 // Karte initialisieren
 let map = L.map('map');
 
-//Hintergrundkarte definierten
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// Overlays definieren
+let overlays = {
+    etappen_marker: L.layerGroup().addTo(map),
+}
+
+
+//Layer control
+L.control.layers({
+    "OSM Mapnik": L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map),
+    "Open Topo Map": L.tileLayer.provider('OpenTopoMap'),
+    "Esri World Imagery": L.tileLayer.provider('Esri.WorldImagery'),
+
+}, {
+    "Etappen": overlays.etappen_marker
 }).addTo(map);
 
 // Marker zeichne 
@@ -211,6 +221,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 for (let i = 0; i < STOPS.length; i++) {
     console.log(i, STOPS[i], STOPS[i].title)
     let marker = L.marker([STOPS[i].lat, STOPS[i].lng]).addTo(map);
+    marker.addTo(overlays.etappen_marker);
     marker.bindPopup(`
         <h2>${STOPS[i].title}</h2>
         <ul>
